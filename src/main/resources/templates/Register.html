@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<head th:replace="/comanRef :: html"></head>
+<title>Register page</title>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js.map"></script>
+
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						$('#sub')
+								.on(
+										'click',
+										function() {
+											var usr = $("#uN").val().trim();
+											var pas = $("#pas").val().trim();
+											var cpas = $("#cpas").val().trim();
+											var emal = $("#emal").val().trim();
+											var mob = $("#mob").val().trim();
+											var dob = $("#dt").val().trim();
+											console.log(usr);
+											if (usr === "") {
+												console.log(usr);
+												$('#inputError1')
+														.text(
+																' Please enter User Name')
+														.show();
+												return false;
+											} else {
+												$('#inputError1').hide();
+											}
+											if (pas === "") {
+												$('#inputError1')
+														.text(
+																' Please enter Password')
+														.show();
+												return false;
+											} else {
+												$('#inputError1').hide();
+											}
+											if (cpas === "") {
+												$('#inputError1')
+														.text(
+																' Please enter Confirm Password')
+														.show();
+												return false;
+											} else {
+												$('#inputError1').hide();
+											}
+											if (cpas != "" && pas != "") {
+												if (cpas != pas) {
+													$('#inputError1')
+															.text(
+																	' Please enter correct Password')
+															.show();
+													return false;
+												} else {
+													$('#inputError1').hide();
+												}
+											}
+											if (emal === "") {
+												$('#inputError1')
+														.text(
+																' Please enter Email')
+														.show();
+												return false;
+											} else {
+												$('#inputError1').hide();
+											}
+											if (mob === "") {
+												$('#inputError1')
+														.text(
+																' Please enter Mobile Number')
+														.show();
+												return false;
+											} else {
+												$('#inputError1').hide();
+											}
+											if (dob === "") {
+												$('#inputError1').text(
+														' Please Select DOB')
+														.show();
+												return false;
+											} else {
+												$('#inputError1').hide();
+											}
+										});
+					});
+	$(document).ready(function() {
+		$('#inputError1').hide();
+		$('.datepicker').datepicker({
+			format : 'mm/dd/yyyy', // change the date format if needed
+			autoclose : true
+		});
+	});
+</script>
+</head>
+
+
+<body>
+	<div class="card text-black">
+		<div class="row d-flex">
+			<div class="col-lg-12 col-xl-11">
+
+				<div class="card-body p-md-5">
+					<div class="row justify-content-center">
+						<div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+							<p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Sign
+								up</p>
+
+							<form class="mx-1 mx-md-4" th:action="@{/register/signup}"
+								th:object="${bankUser}" method="post">
+								<div class="alert alert-danger ml-3" id="inputError1"
+									role="alert">
+									<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+										fill="currentColor" class="bi bi-exclamation-triangle mb-1"
+										viewBox="0 0 16 16">
+ 										 <path
+											d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+										  <path
+											d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
+									</svg>
+								</div>
+
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-user fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<input type="text" id="uN" class="form-control"
+											name="userName" placeholder="Enter your Name" /> <label
+											class="form-label" for="form3Example1c">Your Name</label>
+									</div>
+								</div>
+
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<input type="email" name="email" id="emal"
+											placeholder="Enter your email" class="form-control" /> <label
+											class="form-label" for="form3Example3c">Your Email</label>
+									</div>
+								</div>
+
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<input type="password" name="pasword" id="pas"
+											placeholder="Enter your new password " class="form-control" />
+										<label class="form-label" for="form3Example4c">Password</label>
+									</div>
+								</div>
+
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-key fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<input type="password" name="cpas" id="cpas"
+											placeholder="Renter your new password " class="form-control" />
+										<label class="form-label" for="form3Example4cd">Repeat
+											your password</label>
+									</div>
+								</div>
+
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-key fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<input type="text" name="mobile" id="mob"
+											placeholder="Enter your Mobile no" class="form-control" /> <label
+											class="form-label" for="form3Example4cd">Mobile</label>
+									</div>
+								</div>
+
+								<div class="d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-key fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<input type="text" placeholder="select your DOB" name="dart"
+											id="dt" class="form-control datepicker" /> <label
+											class="form-label" for="form3Example4cd">DOB</label>
+									</div>
+								</div>
+
+								<div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+									<input type="submit" class="btn btn-primary btn-block btn-lg"
+										id="sub" value="Register">
+								</div>
+
+							</form>
+
+						</div>
+						<div
+							class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+							<img
+								src="https://img.freepik.com/free-vector/finance-services-financial-transaction-e-commerce-e-payment_335657-3134.jpg?w=996&t=st=1684001767~exp=1684002367~hmac=73a3a2aaa627019d4b7f9feaf2a7a8cd15d64bffd1c02a076145a0719106f0cc"
+								class="img-fluid" alt="Sample image">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
